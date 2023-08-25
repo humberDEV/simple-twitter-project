@@ -1,7 +1,19 @@
 /* eslint-disable react/prop-types */
-export function TwitterCard ( {userName, name, isFollowing}) {
+import { useState  } from "react"
+
+export function TwitterCard ( { userName, name }) {
+    const [isFollowing, setIsFollowing] = useState(false)
+    
+    const text = isFollowing ? 'Siguiendo' : 'Seguir'
+    const buttonClassName = isFollowing
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button'
+
+    const handleClick = () => {
+        setIsFollowing(!isFollowing)
+    }
+
     const imageSrc = `https://unavatar.io/${userName}`
-    console.log(isFollowing)
     return(
         <article className="tw-followCard">
             <header className="tw-followCard-header">
@@ -15,8 +27,8 @@ export function TwitterCard ( {userName, name, isFollowing}) {
             </header>
 
             <aside> 
-                <button className='tw-followCard-button'>
-                    Seguir
+                <button className={ buttonClassName } onClick={ handleClick }>
+                    { text }
                 </button>
             </aside>
         </article>
