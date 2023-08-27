@@ -1,49 +1,58 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { TwitterCard } from './components/TwitterCard'
+import { NewUserForm } from './components/NewUserForm';
 
 const usersMock = [
     {
       "username": "humberDEV",
-      "name": "Humberto Garía"
+      "name": "Humberto Garía",
+      "initialIsFollowing": false
     },
     {
       "username": "enriquedlc",
-      "name": "Enrique De La Concepción"
+      "name": "Enrique De La Concepción",
+      "initialIsFollowing": false
     },
     {
       "username": "midudev",
-      "name": "Miguel Ángel Durán"
+      "name": "Miguel Ángel Durán",
+      "initialIsFollowing": true
     },
     {
-      "username": "pino",
-      "name": "El Tio"
+      "username": "god",
+      "name": "Elon Musk",
+      "initialIsFollowing": true
     },
     {
-      "username": "ericoso",
-      "name": "Eric Rodriguez"
+      "username": "github",
+      "name": "Github Developer",
+      "initialIsFollowing": false
     }
   ]
 
-import './App.css'
+  import './App.css';
 
-export function App () {
+  export function App() {
+    const [users, setUsers] = useState(usersMock);
+  
+    const addNewUser = (newUser) => {
+      setUsers([...users, newUser]);
+    }
 
-    const [users, setUsers] = useState(usersMock) // => el useState recibe com primer parámetro el estado inicial
+    const printList = () => {
+      return (
+        users.map((user, index) => (
+          <TwitterCard key={index} name={user.name} userName={user.username.toLowerCase()} initialIsFollowing={user.initialIsFollowing} />
+        ))
+      )
+    }
+  
+    return (
+      <div className="App">
 
-    console.log( setUsers )
-
-    return(
-        <div className="App">
-            {
-                users.map((user, index) => 
-                    (
-                        <TwitterCard key={index} name={user.name} userName={user.username} />
-                    )
-                )
-            }
-
-            {/* <CreateUser/> */}
-
-        </div>
-    )
-}
+        {printList()}
+        <NewUserForm addNewUser={ addNewUser } />
+      </div>
+    );
+  }

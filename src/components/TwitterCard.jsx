@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState  } from "react"
 
-export function TwitterCard ( { userName, name }) {
-    const [isFollowing, setIsFollowing] = useState(false)
+export function TwitterCard ( { userName, name, initialIsFollowing }) {
+    const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
     
     const text = isFollowing ? 'Siguiendo' : 'Seguir'
     const buttonClassName = isFollowing
